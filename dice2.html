@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Sunday Dice</title>
+
+<!-- Annotating “Reconstructing the ‘Die’” Copyright (C) 2021 by Jim Kang to learn about its structure
+-->
+</head>
+<body>
+ <style>
+    #a {stroke: #ddd;
+        fill:#eee}
+    #b {fill:#777}
+    #d {stroke: #222;
+        fill: none;
+        transform-origin: center;
+        animation:s 2s linear 99
+    }
+    #d.p {animation-play-state:paused}
+    #e {stroke:#999}
+    @keyframes s {
+        from {transform:rotate(0)}to {transform:rotate(359deg)}}
+    div {width: 60vh}
+    </style>
+    <div>
+        <svg viewbox="0 0 100 100">
+            <g id="a"/>
+            <g id="b"/>
+            <g id="d" class="p">
+                <g id="e"/>
+            </g>
+        </svg>
+    </div>
+    <p id="I"></p>
+    <script>
+    //M = Math,
+r = m => ~~(Math.random() * m),//random positive number betw 0,m-1
+    z = () => r(100) / 100, //random percentage
+s = t => document.getElementById(t), //get el w attribute from DOM
+    t = (e, s) => e.textContent = s, //set the text of element e
+    h = (e, h) => e.innerHTML = e.innerHTML + h, //adds text 
+//draw a circle based on radius and center point
+c = (r, c) =>`<circle r="${r}"cx="${c[0]}"cy="${c[1]}"/>`,
+//draw a line based on start and dend points
+l=(s,e) =>`<line x1="${s[0]}"y1="${s[1]}"x2="${e[0]}"y2="${e[1]}"/>`,
+    midpoint = [50, 50],
+    Pi = Math.PI,
+    C = 2 * Pi, //circumference
+    //a point in x,y based on center, radius and angle
+    p = (c, r, a) => [c[0] + r * Math.cos(a), c[1]+ r * Math.sin(a)],
+    I = s('I'),  //get the text of the document
+    a = s('a'), //get the top viewbox
+    b = s('b'), //get the middle viewbox
+    d = s('d'), //get the botom viewbox
+    D = d.classList,  
+    w = 999,
+    $ = () => {   //compute coordinates for dice
+        R = 39 + r(10); //39-49
+        A = [-C / 32 + z() * C / 16, 
+            .3 * C + z() * C / 16, 
+            .64 * C + z() * C / 16];  
+        B = [A[0], A[2] + Pi, A[1], A[0] + Pi, A[2], A[1] + Pi];
+        H = B.map(a => p(midpoint, R, a));
+        ds = [p(midpoint, R / 2, B[1]), p(midpoint, R / 3, B[3]), p(midpoint, 2 * R / 3, B[3]), p(midpoint, R / 4, B[5]), p(midpoint, R / 2, B[5]), p(midpoint, 3 * R / 4, [5])]
+    },
+    N = i => i + 1 //add 1 to counter i
+    //array of commands
+    L = [{l: .1,f: $}, //compute
+    	{l: 5,a: "Sunday Afternoon 1981"}, 
+    	{a: "Mall, Arcade, RadioShack, Department Store"}, 
+    	{a: "Beeline to ELECTRONICS"}, 
+    	{f() {h(b, c(1, midpoint))},a: "Sound of TVs, RCA, Magnavoxes"},
+    	{f() {h(a, c(R, midpoint))},a: "Woodgrain"}, 
+        {f() {h(b, c(1, H[0]))},a: "Ultrasonic Hive"}, 
+    {f() {h(b, c(1, H[2]) + c(1, H[4]))},a: "Buzzing about the Sames"}, 
+        {f() {h(d, l(midpoint, H[0]))},a:"ATARIs on Display"}, 
+        {f() {h(d, l(midpoint, H[2]) + l(midpoint, H[4]))},a:"8Kb, OK"},
+        {f() {h(s('e'), l(midpoint, H[1]) + l(midpoint, H[3]) + l(midpoint, H[5]))},a: "ATARI 400"}, 
+        {l: 8,f() {h(d, `<polygon points="${H.map(p => p.join(',')).join(' ')}"/>`)}}, {
+        f() {h(d, ds.map(p => c(3, p)))},a: "Browns"}, {a: "Oranges"}, {a: "Keyboard"}, 
+        {a: "Pop Open Lid"}, 
+        {l: 4 + r(4),f() {D.remove('p')},
+        a: "Cartridge Slot"}, 
+        {f() {D.add('p')},a: "See"}, 
+        {a: "TOUCH"}, 
+        {a: "WANT"}, 
+        {a: "internal timer counting down"}, 
+        {a: "the moment you say"}, 
+        {a: "'come on, things to do'"}, 
+        {a: "…DON'T RUIN MY FUN"    }, 
+        {a: "…tick,tick,tick"}, 
+        {f() {w = 150}}],
+        //main program loop
+        G = i => {
+            n = L[i]; //execute command step i
+            n.f ? n.f() : 0;  //if there is a function, run it
+            t(I, n.a);i > 26 ? N = i => r(27) : 0;  //write text
+            //increment to next command, if there's a l value in the next command use that as the delay, otherwise, just use 4*w
+        setTimeout(G, (n.l ? n.l : 4) * w, N(i))}; 
+    G(0)
+    </script>
+</body>
+</html>
