@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Arcs</title>
+	<!--Demonstrating how to draw the Atari logo with canvas
+	-->
+</head>
+<body>
+<canvas id="canvas" width="400" height="400" style="border:1px solid #d3d3d3;"></canvas>
+<script>
+	var canvas = document.getElementById("canvas")
+	var ctx = canvas.getContext("2d")
+	ctx.lineWidth=30;
+	ctx.strokeStyle="Green" 
+	ctx.beginPath() //left
+	ctx.moveTo(150,50)
+	ctx.lineTo(150,150)
+	ctx.stroke()
+	ctx.beginPath() //middle
+	ctx.moveTo(200,50)
+	ctx.lineTo(200,150)
+	ctx.stroke()
+	ctx.beginPath() //right
+	ctx.moveTo(250,50)
+	ctx.lineTo(250,150)
+	ctx.stroke()
+	ctx.beginPath()
+	ctx.arc(50,150,100,0,.5*Math.PI,false)
+	ctx.stroke()
+	ctx.beginPath()
+	ctx.moveTo(200,150)
+	ctx.lineTo(200,280)
+	ctx.stroke()
+	ctx.strokeStyle="Red" 
+	ctx.beginPath()
+	ctx.arc(350,150,100,Math.PI,.5*Math.PI,true)
+	ctx.stroke();
+	/*for (var i = 0; i<8;i++){
+		ctx.fillRect(i*10,i*10,10,10);
+	}
+	ctx.fillStyle= "Black";
+	ctx.fillRect(90,90,100,100)	
+ctx.font="200px Arial";
+ctx.fillText("UIU",10,50);
+*/
+// save img
+//https://stackoverflow.com/questions/17618574/how-can-i-generate-an-image-based-on-text-and-css
+//Canvas2Image.saveAsImage(c, 200, 100, 'png');
+</script>
+</script>
+</body>
+</html>
