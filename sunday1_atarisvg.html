@@ -1,0 +1,104 @@
+ <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+    <!--
+        d animation property
+    animation:s 2s linear 99 
+    -->
+</head>
+<body>
+	 <style>
+    #a {stroke: #ddd;
+        fill:#eee}
+    #b {fill:#777; stroke:#000 ; stroke-width: 7}
+    #d {fill-opacity: 0;
+        stroke:#000;
+        stroke-width: 1;
+        transform-origin: center;
+        
+    }
+    <clipPath id="MyClip"><rect x="10" y="30" width="50" height="50"></rect></clipPath>  
+    #d.p {animation-play-state:paused}
+    #e {stroke:#999}
+    @keyframes s {
+        from {transform:rotate(0)}to {transform:rotate(359deg)}}
+    div {width: 50vh}
+    </style>
+<div>
+        <svg viewbox="0 0 100 100">
+            <g id="a"/>
+            <g id="b"/>
+            <g id="d" class="p">
+            <g id="e"/>
+            </g>
+        </svg>
+    </div>
+    <p id="I"></p>
+    <script>
+    //M = Math,
+//draw svg path
+
+r = m => ~~(Math.random() * m),//random positive number betw 0,m-1
+    z = () => r(100) / 100, //random percentage
+s = t => document.getElementById(t), //get el w attribute from DOM
+    t = (e, s) => e.textContent = s, //set the text of element e
+    h = (e, h) => e.innerHTML = e.innerHTML + h, //adds HTML text 
+//draw SVG circle based on radius and center point
+c = (r, c) =>`<circle r="${r}"cx="${c[0]}"cy="${c[1]}" stroke-dasharray="78,235" stroke-dashoffset="235/>`,
+//draw SVG line based on start and dend points
+l=(s,e) =>`<line x1="${s[0]}"y1="${s[1]}"x2="${e[0]}"y2="${e[1]}"/>`,
+    midpoint = [50, 50],
+    Pi = Math.PI,
+    C = 2 * Pi, //circumference
+    //a point in x,y based on center, radius and angle
+    p = (c, r, a) => [c[0] + r * Math.cos(a), c[1]+ r * Math.sin(a)],
+    I = s('I'),  //get the text of the document
+    a = s('a'), //get the top viewbox
+    b = s('b'), //get the middle viewbox
+    d = s('d'), //get the botom viewbox
+    D = d.classList,  //bottom viewbox elements
+    w = 100, //seconds between each frame
+    $ = () => {   //compute coordinates for atari
+       	console.log("$ function")
+    },
+    N = i => i + 1 //add 1 to counter i
+    //array of commands
+    L = [{l:.1, f:$},
+    {l: 5,a:"hello"},
+
+    //{f() {h(d, `<rect  x="10" y="30" width="50" height="50"/>`)}, a:"5"},
+    //{f() {h(b, `<circle cx="100" cy="100" r="50" stroke-dasharray="78,235" stroke-dashoffset="235"></circle>`)},a:"4b"},
+    {f() {h(d,`<rect x="28.19" y="5.96" width="5.56" height="47.03"/>`)},a:"1"},
+    {f() {h(d, `<path d="M4,53 l.9,0 c11-.3,21-12,21-27v-20h-4v13.84c0,13.42-8.03,24.54-18.49,26.46V53 z"/>`)}, a:"2"},
+    {f() {h(d, `<path d="M57.82,53.08l-.92,.01c-11.79-.3-21-12-21-27.6v-20h3.7v13.84c.0,13.42,8.03,24.5,18.5,26.5V53.1z"/>`)}, a:"3"},
+    {f() {h(d, `<path d="M11.72,66.56l-1.57-7.62l-1.72,7.62H11.72z M17.64,73.18h-3.91l-.97-3.36H7.49l-1.02,3.36H2.56l4.88-15.62
+        c.2-.6,.5-1.11,.91-1.52c.49-.45,1.04-.68,1.67-.68c.7,0,1.32,.24,1.88,.73c.49,.44,.84,.99,1.04,1.67L17.64,73.18z"/>`)},a:"4"},
+     {f() {h(d, `<polygon points="26.6,58.97 23.18,58.97 23.18,73.18 19.35,73.18 19.35,58.97 15.9,58.97 15.9,55.64 26.6,55.64   "/>`)},a:"5"},
+      {f() {h(d, `<path d="M34.12,66.56l-1.57-7.62l-1.72,7.62H34.12z M40.05,73.18h-3.91l-.97-3.36h-5.27l-1.02,3.36h-3.91l4.88-15.62 c.19-.61,5-1.11,.91-1.52c.49-.45,1.04-.68,1.67-.68c7,0,1.32,.24,1.88,.73c.49,.44,.84,.99,1.04,1.67L40.05,73.18z"/>`)},a:"6"},
+      {f() {h(d, `<path d="M53.29,73.18h-4.44l-3.73-6.92c-.17-.34-.32-.64-.43-.91c-.11-.27-.17-.48-.17-.63c0-.77,.62-1.41,1.87-1.9
+        c1.24-5,1.87-1.11,1.87-1.86c0-.45-.18-9-.54-1.34c-.36-.44-.74-.66-1.16-.66h-2.19v14.21h-3.71V58.01c0-.54,.25-1.06,.76-1.56
+        c5-.51,1.01-.76,1.51-.76h3.73c1.44,0,2.71,.5,3.78,1.51c1.08,1.01,1.62,2.18,1.62,3.51c0,1.06-.33,1.99-.99,2.78
+        c-.57,.69-1.4,1.28-2.48,1.77L53.29,73.18z"/>"/>`)},a:"7"},
+
+      {f() {h(d, `<rect x="54" y="56" width="3.8" height="17.5"/>`)}, a:"8"},
+{f() {w = 150}}],  //24
+        //main program loop
+        G = i => {
+            n = L[i]; //lookup command step i
+            console.log(n)
+            n.f ? n.f() : 0;  //if there is a function, run it
+            console.log(n.a)
+            t(I, n.a);//write text
+            i > (L.length)-1 ? N = i => r((L.length)-1) : 0;  
+            //are we at the last command, if so, go to a random command
+            console.log(i)
+            //increment to next command, if there's a l value in the next command use that as the delay, otherwise, just use 4*w
+       setTimeout(G, (n.l ? n.l : 4) * w, N(i))
+    }; 
+    G(0)
+    </script> 
+</body>
+</html>
