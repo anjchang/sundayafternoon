@@ -14,11 +14,10 @@
     #a {stroke: #ddd;
         fill:#eee}
     #b {fill:#777; stroke:#000 ; stroke-width: 7}
-    #d {fill-opacity: 0;
+    #d {fill:url(#pattern);
         stroke:#000;
         stroke-width: 1;
-        transform-origin: center;
-        
+        transform-origin: center; 
     }
     #d.p {animation-play-state:paused}
     #e {stroke:#999}
@@ -30,7 +29,6 @@
         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewbox="0 0 100 100" xml:space="preserve">
             <defs>
         <linearGradient id="rainbowGradient" x1="0" y1="0" x2="0" y2="100%">
-                 <linearGradient id="rainbowGradient" x1="0" y1="0" x2="0" y2="100%">
           <stop offset="0.00%" stop-color="hsl(15, 100%, 50%)"/><stop offset="5%" stop-color="hsl(15, 100%, 50%)"/>
           <stop offset="20.8%" stop-color="hsl(90, 100%, 50%)"/><stop offset="25.8%" stop-color="hsl(90, 100%, 50%)"/>        
           <stop offset="62.5%" stop-color="hsl(240, 100%, 50%)"/><stop offset="67.5%" stop-color="hsl(240, 100%, 50%)"/>
@@ -53,7 +51,6 @@
                  repeatCount="indefinite"/>
       </rect>
     </pattern>
-   
             <g id="a"/>
             <g id="b"/>
             <g id="d" class="p">
@@ -95,7 +92,7 @@ l=(s,e) =>`<line x1="${s[0]}"y1="${s[1]}"x2="${e[0]}"y2="${e[1]}"/>`,
     L = [{l:.1, f:$},
     {l: 5,a:"hello"},
     {f() {h(d,`<rect x="28.19" y="5.96" width="5.56" height="47.03"/>`)},a:"1"},
-    {f() {h(d, `<path d="M4,53 l.9,0 c11-.3,21-12,21-27v-20h-4v13.84c0,13.42-8.03,24.54-18.49,26.46V53 z"/>`)}, a:"2"},
+    {f() {h(d, `<path d="M4,53 l.9,0 c11-.3,21-12,21-27v-20h-4v13.84c0,13.42-8.03,24.54-18.49,26.46V53 z"/>`)}, a:"When we get to the big department store at the far end of the mall, I make a beeline to the electronics department. I could have gone directly to it even if I had never been there before. It is the sound of the televisions that gives it away. Rows of RCAs and Magnavoxes, resplendent in their woodgrain cabinets, combined to into an ultrasonic hive, a buzz that kid hearing can't miss."},
     {f() {h(d, `<path d="M 57.82 53 l -0.9 0 c -11 -0.3 -21 -12 -21 -27 v -20 h 4 v 13.84 c 0 13.42 8.03 24.54 18.49 26.46 V 53 Z"/>`)}, a:"3"},
   {f() {h(d, `<path d="M11.72,66.56l-1.57-7.62l-1.72,7.62H11.72z M17.64,73.18h-3.91l-.97-3.36H7.49l-1.02,3.36H2.56l4.88-15.62 c.2-.6,.5-1.11,.91-1.52c.49-.45,1.04-.68,1.67-.68c.7,0,1.32,.24,1.88,.73c.49,.44,.84,.99,1.04,1.67L17.64,73.18z"/>`)},a:"4"},
      {f() {h(d, `<polygon points="26.6,58.97 23.18,58.97 23.18,73.18 19.35,73.18 19.35,58.97 15.9,58.97 15.9,55.64 26.6,55.64   "/>`)},a:"T"},
