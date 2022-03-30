@@ -1,0 +1,119 @@
+ <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+    <!--
+        d animation property
+    animation:s 2s linear 99 
+    -->
+</head>
+<body>
+	 <style>
+    #a {stroke: #ddd;
+        fill:#eee}
+    #b {fill:#777; stroke:#000 ; stroke-width: 7}
+    #d {fill-opacity: 0;
+        stroke:#000;
+        stroke-width: 1;
+        transform-origin: center;
+        
+    }
+    #d.p {animation-play-state:paused}
+    #e {stroke:#999}
+        
+
+    div {width: 50vh}
+    </style>
+<div>
+        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewbox="0 0 100 100" xml:space="preserve">
+            <defs>
+        <linearGradient id="rainbowGradient" x1="0" y1="0" x2="0" y2="100%">
+                 <linearGradient id="rainbowGradient" x1="0" y1="0" x2="0" y2="100%">
+          <stop offset="0.00%" stop-color="hsl(15, 100%, 50%)"/><stop offset="5%" stop-color="hsl(15, 100%, 50%)"/>
+          <stop offset="20.8%" stop-color="hsl(90, 100%, 50%)"/><stop offset="25.8%" stop-color="hsl(90, 100%, 50%)"/>        
+          <stop offset="62.5%" stop-color="hsl(240, 100%, 50%)"/><stop offset="67.5%" stop-color="hsl(240, 100%, 50%)"/>
+          <stop offset="95.8%" stop-color="hsl(360, 100%, 50%)"/><stop offset="100%" stop-color="hsl(360, 100%, 50%)"/>
+        </linearGradient>
+    </defs>
+    <pattern id="pattern" x="0" y="0" width="100%" height="300%" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="100%" height="150%" fill="url(#rainbowGradient)">
+        <animate attributeType="XML"
+                 attributeName="y"
+                 from="0" to="149%"
+                 dur="5s"
+                 repeatCount="indefinite"/>
+      </rect>
+      <rect x="0" y="150%" width="100%" height="150%" fill="url(#rainbowGradient)">
+        <animate attributeType="XML"
+                 attributeName="y"
+                 from="-150%" to="0"
+                 dur="5s"
+                 repeatCount="indefinite"/>
+      </rect>
+    </pattern>
+   
+            <g id="a"/>
+            <g id="b"/>
+            <g id="d" class="p">
+            <g id="e"/>
+            </g>
+        </svg>
+    </div>
+    <p id="I"></p>
+    <script>
+    //M = Math,
+//draw svg path
+
+r = m => ~~(Math.random() * m),//random positive number betw 0,m-1
+    z = () => r(100) / 100, //random percentage
+s = t => document.getElementById(t), //get el w attribute from DOM
+    t = (e, s) => e.textContent = s, //set the text of element e
+    h = (e, h) => e.innerHTML = e.innerHTML + h, //adds HTML text 
+//draw SVG circle based on radius and center point
+c = (r, c) =>`<circle r="${r}"cx="${c[0]}"cy="${c[1]}" stroke-dasharray="78,235" stroke-dashoffset="235/>`,
+//draw SVG line based on start and dend points
+l=(s,e) =>`<line x1="${s[0]}"y1="${s[1]}"x2="${e[0]}"y2="${e[1]}"/>`,
+    midpoint = [50, 50],
+    Pi = Math.PI,
+    C = 2 * Pi, //circumference
+    //a point in x,y based on center, radius and angle
+    p = (c, r, a) => [c[0] + r * Math.cos(a), c[1]+ r * Math.sin(a)],
+    I = s('I'),  //get the text of the document
+    a = s('a'), //get the top viewbox
+    b = s('b'), //get the middle viewbox
+    d = s('d'), //get the botom viewbox
+    D = d.classList,  //bottom viewbox elements
+    w = 100, //seconds between each frame
+    $ = () => {   //compute coordinates for atari
+        A=10;
+       	console.log("$ function")
+    },
+    N = i => i + 1 //add 1 to counter i
+    //array of commands
+    L = [{l:.1, f:$},
+    {l: 5,a:"hello"},
+    {f() {h(d,`<rect x="28.19" y="5.96" width="5.56" height="47.03"/>`)},a:"1"},
+    {f() {h(d, `<path d="M4,53 l.9,0 c11-.3,21-12,21-27v-20h-4v13.84c0,13.42-8.03,24.54-18.49,26.46V53 z"/>`)}, a:"2"},
+    {f() {h(d, `<path d="M 57.82 53 l -0.9 0 c -11 -0.3 -21 -12 -21 -27 v -20 h 4 v 13.84 c 0 13.42 8.03 24.54 18.49 26.46 V 53 Z"/>`)}, a:"3"},
+  {f() {h(d, `<path d="M11.72,66.56l-1.57-7.62l-1.72,7.62H11.72z M17.64,73.18h-3.91l-.97-3.36H7.49l-1.02,3.36H2.56l4.88-15.62 c.2-.6,.5-1.11,.91-1.52c.49-.45,1.04-.68,1.67-.68c.7,0,1.32,.24,1.88,.73c.49,.44,.84,.99,1.04,1.67L17.64,73.18z"/>`)},a:"4"},
+     {f() {h(d, `<polygon points="26.6,58.97 23.18,58.97 23.18,73.18 19.35,73.18 19.35,58.97 15.9,58.97 15.9,55.64 26.6,55.64   "/>`)},a:"T"},
+      {f() {h(d, `<path d="M 34.12 66.56 l -1.57 -7.62 l -1.72 7.62 H 34.12 Z M 40.04 73.18 h -3.91 l -0.97 -3.36 H 29.89 l -1.02 3.36 H 24.96 l 4.88 -15.62 c 0.2 -0.6 0.5 -1.11 0.91 -1.52 c 0.49 -0.45 1.04 -0.68 1.67 -0.68 c 0.7 0 1.32 0.24 1.88 0.73 c 0.49 0.44 0.84 0.99 1.04 1.67 L 40.04 73.18 Z"/>`)},a:"A2"},
+      {f() {h(d, `<path d="M 53.29 73.18 h -4.44 l -3.73 -6.92 c -0.17 -0.34 -0.32 -0.64 -0.43 -0.91 c -0.11 -0.27 -0.17 -0.48 -0.17 -0.63 C 44.52 63.95 45.14 63.31 46.39 62.82 c 1.61 -0.82 1.61 -0.82 1.87 -1.86 c 0 -0.45 -0.26 -0.96 -0.54 -1.34 c -0.36 -0.44 -0.74 -0.66 -1.16 -0.66 h -2.19 v 14.21 h -3.71 V 58.01 c 0 -0.54 0.25 -1.06 0.76 -1.56 c 0.58 -0.45 1.01 -0.76 1.51 -0.76 h 3.73 c 1.44 0 2.71 0.5 3.78 1.51 c 1.08 1.01 1.62 2.18 1.62 3.51 c 0 1.06 -0.33 1.99 -0.99 2.78 c -0.57 0.69 -1.4 1.28 -2.48 1.77 L 53.29 73.18 Z"/>"/>`)},a:"7"},
+      {f() {h(d, `<rect x="54.25" y="55.75" width="3.8" height="17.5"/>`)}, a:"8"},
+{f(){w=150}}],  //24
+        //main program loop
+        G = i => {
+            n = L[i]; //lookup command step i
+            n.f ? n.f() : 0;  //if there is a function, run it
+            t(I, n.a);//write text
+            i >= L.length-1 ? N = i => r(L.length-1) : 0;  
+            //are we at the last command, if so, go to a random command
+            //increment to next command, if there's a l value in the next command use that as the delay, otherwise, just use 4*w
+       setTimeout(G, (n.l ? n.l : 4) * w, N(i))
+    }; 
+    G(0)
+    </script> 
+</body>
+</html>
