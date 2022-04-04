@@ -1,0 +1,92 @@
+ <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+    <style>
+    #a {stroke: #ddd;
+        fill:#eee}
+    #b {fill:#777; stroke:#000 ; stroke-width: 7}
+    #d {fill: #000;
+        stroke:#000;
+        stroke-width: 1;
+        transform-origin: center; 
+    }
+    #d.p {fill:url(#pattern);}
+    #e {stroke:#999}
+    div {width: 50vh}
+    </style>
+<div><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewbox="0 0 100 100" xml:space="preserve">
+            <defs>
+        <linearGradient id="rainbowGradient" x1="0" y1="0" x2="0" y2="100%">
+          <stop offset="0.00%" stop-color="hsl(15, 100%, 50%)"/><stop offset="5%" stop-color="hsl(15, 100%, 50%)"/>
+          <stop offset="20.8%" stop-color="hsl(90, 100%, 50%)"/><stop offset="25.8%" stop-color="hsl(90, 100%, 50%)"/>        
+          <stop offset="62.5%" stop-color="hsl(240, 100%, 50%)"/><stop offset="67.5%" stop-color="hsl(240, 100%, 50%)"/>
+          <stop offset="95.8%" stop-color="hsl(360, 100%, 50%)"/><stop offset="100%" stop-color="hsl(360, 100%, 50%)"/>
+        </linearGradient>
+    </defs>
+    <pattern id="pattern" x="0" y="0" width="100%" height="300%" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="100%" height="150%" fill="url(#rainbowGradient)">
+        <animate attributeType="XML"
+                 attributeName="y"
+                 from="0" to="149%"
+                 dur="5s"
+                 repeatCount="indefinite"/>
+      </rect>
+      <rect x="0" y="150%" width="100%" height="150%" fill="url(#rainbowGradient)">
+        <animate attributeType="XML"
+                 attributeName="y"
+                 from="-150%" to="0"
+                 dur="5s"
+                 repeatCount="indefinite"/>
+      </rect>
+    </pattern>
+            <g id="a"/>
+            <g id="b"/>
+            <g id="d" class="p">
+            <g id="e"/>
+            </g>
+        </svg>
+    </div>
+    <p id="I"></p>
+    <script>
+r = m => ~~(Math.random() * m),
+s = t => document.getElementById(t),
+    t = (e, s) => e.textContent = s,
+    h = (e, h) => e.innerHTML = e.innerHTML + h,
+    I = s('I'),
+    a = s('a'),
+    b = s('b'),
+    d = s('d'),
+    D = d.classList,
+    w = 1000,
+    $ = () => {
+        D.remove('p')
+    },
+    N = i => i + 1
+    L = [{l:.1, f:$},
+    {l: 5,a:""},
+    {f() {h(d,`<rect x="28.19" y="5.96" width="5.56" height="47.03"/>`)},a:"It’s 1981 or so. Probably a Sunday afternoon. My parents take me to the mall. The good one with a Radio Shack and an arcade, not the boring one with corridors of clothes and jewelry stores."},
+    {f() {h(d, `<path d="M4,53 l.9,0 c11-.3,21-12,21-27v-20h-4v13.84c0,13.42-8.03,24.54-18.49,26.46V53 z"/>`)}, a:"When we get to the big department store at the far end of the mall, I make a beeline to the electronics department. I could have gone directly to it even if I had never been there before. It is the sound of the televisions that gives it away. Rows of RCAs and Magnavoxes, resplendent in their woodgrain cabinets, combined to into an ultrasonic hive, a buzz that kid hearing can't miss."},
+    {f() {h(d, `<path d="M 57.82 53 l -0.9 0 c -11 -0.3 -21 -12 -21 -27 v -20 h 4 v 13.84 c 0 13.42 8.03 24.54 18.49 26.46 V 53 Z"/>`)}, a:"It’s not the TVs I’m there to see, it’s the TV games, it’s the computers. If I’m lucky, the store has an Atari on display. It’s probably an Atari 400, sleek, flat keyboard, all browns and oranges, and the adorable lid that pops open to reveal the cartridge slot. What I want to see and touch."},
+  {f() {h(d, `<path d="M11.72,66.56l-1.57-7.62l-1.72,7.62H11.72z M17.64,73.18h-3.91l-.97-3.36H7.49l-1.02,3.36H2.56l4.88-15.62 c.2-.6,.5-1.11,.91-1.52c.49-.45,1.04-.68,1.67-.68c.7,0,1.32,.24,1.88,.73c.49,.44,.84,.99,1.04,1.67L17.64,73.18z"/>`)},a:"My internal timer is already counting down, to the moment when I’m told to come on, Kay, we have things to do. I try not to let the nagging inevitability ruin my fun."},
+     {f() {h(d, `<polygon points="26.6,58.97 23.18,58.97 23.18,73.18 19.35,73.18 19.35,58.97 15.9,58.97 15.9,55.64 26.6,55.64   "/>`)},a:"The Atari is likely to be doing one of three things. Most likely — in a busy department store where clerks have better things to do — is MEMO PAD. A blank electronic slate, a blue screen where I can type, and the words appear on the screen but don’t do anything. I try to draw a simple picture using the memo pad. As I type, the computer’s speaker makes a succinct tick, tick, tick noise."},
+      {f() {h(d, `<path d="M 34.12 66.56 l -1.57 -7.62 l -1.72 7.62 H 34.12 Z M 40.04 73.18 h -3.91 l -0.97 -3.36 H 29.89 l -1.02 3.36 H 24.96 l 4.88 -15.62 c 0.2 -0.6 0.5 -1.11 0.91 -1.52 c 0.49 -0.45 1.04 -0.68 1.67 -0.68 c 0.7 0 1.32 0.24 1.88 0.73 c 0.49 0.44 0.84 0.99 1.04 1.67 L 40.04 73.18 Z"/>`)},a:"Or, the computer might be running the demonstration cartridge, which plays a plucky little tune and tells me all about the advanced and easy-to-use Atari Home Computer. The demo asks me to type my name, and responds with “HI KAY”. Hi."},
+      {f() {h(d, `<path d="M 53.29 73.18 h -4.44 l -3.73 -6.92 c -0.17 -0.34 -0.32 -0.64 -0.43 -0.91 c -0.11 -0.27 -0.17 -0.48 -0.17 -0.63 C 44.52 63.95 45.14 63.31 46.39 62.82 c 1.61 -0.82 1.61 -0.82 1.87 -1.86 c 0 -0.45 -0.26 -0.96 -0.54 -1.34 c -0.36 -0.44 -0.74 -0.66 -1.16 -0.66 h -2.19 v 14.21 h -3.71 V 58.01 c 0 -0.54 0.25 -1.06 0.76 -1.56 c 0.58 -0.45 1.01 -0.76 1.51 -0.76 h 3.73 c 1.44 0 2.71 0.5 3.78 1.51 c 1.08 1.01 1.62 2.18 1.62 3.51 c 0 1.06 -0.33 1.99 -0.99 2.78 c -0.57 0.69 -1.4 1.28 -2.48 1.77 L 53.29 73.18 Z"/>"/>`)},a:"Or, if I hit the jackpot, there might be a BASIC programming cartridge under that pop-open lid. It's a one-person speed programming challenge. What little program can I create in the few minutes that I have? Tick, tick, tick, tick, tick."},
+      {f() {h(d, `<rect x="54.25" y="55.75" width="3.8" height="17.5"/>`)}, a:"Mom’s calling"},
+      {f() {D.add('p')},a: "it’s time to go"}, 
+{f(){w=150}}],
+        G = i => {
+            n = L[i]; 
+            n.f ? n.f() : 0;
+            t(I, n.a);
+            i >= L.length-1 ? N = i => r(L.length-1) : 0;  
+       setTimeout(G, (n.l ? n.l : 4) * w, N(i))
+    }; 
+    G(0)
+    </script> 
+</body>
+</html>
